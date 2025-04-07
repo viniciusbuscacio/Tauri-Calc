@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Calc",
+  "version": "0.1.0",
+  "identifier": "com.tauri.calc.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "Calc",
+        "width": 320,
+        "height": 480,
+        "decorations": false,
+        "transparent": true,
+        "label": "main",
+        "minWidth": 280,
+        "minHeight": 420
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": {}
+}
