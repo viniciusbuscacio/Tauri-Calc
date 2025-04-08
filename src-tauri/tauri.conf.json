@@ -5,7 +5,7 @@
   "identifier": "com.tauri.calc.app",
   "build": {
     "beforeDevCommand": "npm run dev",
-    "devUrl": "http://localhost:4322",
+    "devUrl": "http://localhost:4321",
     "beforeBuildCommand": "npm run build",
     "frontendDist": "../dist"
   },
