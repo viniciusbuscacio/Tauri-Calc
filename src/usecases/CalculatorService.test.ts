@@ -37,18 +37,15 @@ describe('CalculatorService', () => {
       expect(result).toEqual({ value: '2 + ', error: true });
     });
     
-    it('should handle division by zero with error', async () => {
+    it('should handle division by zero with specific error message', async () => {
       // Mock the backend to return a specific division by zero error
       (invoke as jest.Mock).mockRejectedValueOnce(new Error('Cannot divide by zero'));
       
       const result = await CalculatorService.calculateExpression(new Expression('5/0'));
       
       expect(invoke).toHaveBeenCalledWith('calculate_result', { expression: '5/0' });
-      // The frontend currently displays "Error" for all backend errors
-      expect(result).toEqual({ value: 'Error', error: true });
-      
-      // This test verifies that division by zero is detected and returns an error,
-      // even if we can't see the specific "Cannot divide by zero" message in the frontend yet
+      // Should now display the specific error message
+      expect(result).toEqual({ value: 'Cannot divide by zero', error: true });
     });
   });
 

@@ -20,6 +20,13 @@ export class CalculatorService {
       return { value: result, error: false };
     } catch (error) {
       console.error(`Error invoking ${this.RUST_CMD.CALCULATE}:`, error);
+      
+      // Check if the error is about division by zero
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      if (errorMessage.includes("divide by zero") || errorMessage.includes("division by zero")) {
+        return { value: "Cannot divide by zero", error: true };
+      }
+      
       return { value: "Error", error: true };
     }
   }
