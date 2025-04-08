@@ -1,80 +1,120 @@
-# Tauri Calc 🧮
+# Tauri Calc
 
-A clean, modern, and cross-platform calculator application built with the power of Tauri, React, and Rust.
-
+A clean, modern, and cross-platform calculator application built with Tauri, React, and Rust following Clean Architecture principles.
 
 
 ## About The Project
 
-This project is a desktop calculator application demonstrating the use of Tauri for building lightweight, secure, and cross-platform apps with web technologies for the frontend and Rust for the backend.
+This project is a desktop calculator application built with Tauri, leveraging the security and performance benefits of Rust for the backend while utilizing React with TypeScript for the frontend. The application is structured following Clean Architecture principles, making it maintainable, testable, and adaptable.
 
-It aims to provide a familiar calculator experience with a custom, native-feeling interface. Calculations are handled efficiently and safely on the Rust backend.
+The calculator features a modern UI with custom window chrome, providing a native-feeling experience across platforms. All calculations are performed safely within the Rust backend, utilizing the meval parsing library for expression evaluation.
 
-## Features 
+## Features
 
-*   Standard arithmetic operations: Addition (+), Subtraction (-), Multiplication (×), Division (÷)
-*   Percentage (%) calculations (basic frontend implementation)
-*   Decimal point (.) input
-*   Clear (C / Escape) and Backspace (⌫ / Backspace key) functionality
-*   Responsive display with dynamic font sizing for longer numbers
-*   Full keyboard support, including Numpad keys and Enter for calculation
-*   Visual feedback (button flash) for keyboard input
-*   Custom title bar with native-like window controls (Minimize, Maximize/Restore, Close)
-*   Window dragging via the title bar
-*   Manual window resizing by dragging the edges
+* Standard arithmetic operations: Addition (+), Subtraction (-), Multiplication (×), Division (÷)
+* Percentage (%) calculations
+* Decimal point input
+* Clear (C) and Backspace functionality
+* Responsive display with dynamic font sizing for longer numbers
+* Complete keyboard support, including Numpad and function keys
+* Visual feedback for keyboard input
+* Custom title bar with window controls (Minimize, Maximize/Restore, Close)
+* Window dragging via the title bar
+* Window resizing via edge dragging
+* Clipboard integration (Copy/Paste)
+* Right-click context menu
+* Cross-platform compatibility (Windows, macOS, Linux)
 
-## Tech Stack 
+## Architecture
 
-*   **Framework:** [Tauri (v2)](https://tauri.app/) - Building cross-platform desktop apps with web frontends.
-*   **Backend Logic:** [Rust](https://www.rust-lang.org/)
-    *   **Expression Evaluation:** [meval](https://crates.io/crates/meval) crate
-*   **Frontend UI:** [React](https://reactjs.org/) (using [Vite](https://vitejs.dev/))
-*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+The application follows Clean Architecture principles, with clear separation of concerns:
 
-## Platform Support 
+* **Domain Layer**: Core business logic and entities
+* **Use Cases Layer**: Application-specific business rules
+* **Infrastructure Layer**: External interfaces and technical implementations
+* **Presentation Layer**: UI components and user interaction
+
+## Tech Stack
+
+* **Framework**: [Tauri (v2)](https://tauri.app/) - Cross-platform desktop application framework
+* **Backend**:
+  * **Language**: [Rust](https://www.rust-lang.org/)
+  * **Expression Evaluation**: [meval](https://crates.io/crates/meval) crate
+* **Frontend**:
+  * **Framework**: [React](https://reactjs.org/)
+  * **Build Tool**: [Vite](https://vitejs.dev/)
+  * **Language**: [TypeScript](https://www.typescriptlang.org/)
+* **Testing**:
+  * **Frontend**: Jest + Testing Library
+  * **Backend**: Rust's native testing framework
+
+## Platform Support
 
 Built with Tauri, this application runs natively on:
 
-*   ✅ **Windows**
-*   ✅ **macOS** (Intel & Apple Silicon via Universal Binary)
-*   ✅ **Linux**
+* **Windows** 10/11
+* **macOS** (Intel & Apple Silicon via Universal Binary)
+* **Linux** (Debian/Ubuntu-based distributions)
 
-## Getting Started (Development)
+## Development Setup
 
-To run this project locally for development:
+### Prerequisites
 
-1.  **Prerequisites:**
-    *   [Node.js](https://nodejs.org/) & npm (or yarn/pnpm)
-    *   [Rust & Cargo](https://www.rust-lang.org/tools/install)
-    *   [Tauri Prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites) (Ensure WebView2 for Windows, WebKitGtk for Linux, Xcode Tools for macOS are set up)
-2.  **Clone the repository:**
-    ```bash
-    git clone <your-repo-url>
-    cd <your-repo-name>
-    ```
-3.  **Install frontend dependencies:**
-    ```bash
-    npm install
-    # or yarn install / pnpm install
-    ```
-4.  **Run the development server:**
-    ```bash
-    npm run tauri dev
-    # or yarn tauri dev / pnpm tauri dev
-    ```
+* [Node.js](https://nodejs.org/) (v18 or higher)
+* [Rust & Cargo](https://www.rust-lang.org/tools/install) (2021 edition)
+* Platform-specific dependencies:
+  * **Windows**: Microsoft Visual C++ Build Tools, WebView2
+  * **macOS**: Xcode Command Line Tools
+  * **Linux**: WebKitGTK, standard build tools
 
-## Building for Production 🚀
+### Installation
 
-To create distributable application bundles for different platforms:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/username/calc-app.git
+   cd calc-app
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run tauri dev
+   ```
+
+## Building for Production
+
+To create distributable application bundles:
 
 ```bash
 npm run tauri build
-# or yarn tauri build / pnpm tauri build
+```
 
-This command will generate installers (.msi, .app, .dmg, .deb, .AppImage) in the src-tauri/target/release/bundle/ directory.
+This command generates platform-specific installers in `src-tauri/target/release/bundle/`:
+* Windows: `.msi` installer
+* macOS: `.dmg` and `.app` bundle
+* Linux: `.deb` and `.AppImage`
 
-Note: For distributing macOS apps without security warnings, code signing and notarization through an Apple Developer account are required.
+**Note:** For macOS distribution, code signing and notarization via an Apple Developer account are required to avoid security warnings.
 
-License
-Distributed under the MIT License. See LICENSE file for more information.
+## Testing
+
+Run the test suite:
+
+```bash
+npm test
+```
+
+Run tests with coverage reporting:
+
+```bash
+npm run test:coverage
+```
+
+## License
+
+Distributed under the MIT License. See `LICENSE` file for more information.
 
