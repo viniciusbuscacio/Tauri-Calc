@@ -11,9 +11,7 @@
   },
   "app": {
     "withGlobalTauri": true,
-    "#[cfg(target_os = \"macos\")]": {
-      "macOSPrivateApi": true
-    },
+    "macOSPrivateApi": true,
     "windows": [
       {
         "fullscreen": false,
