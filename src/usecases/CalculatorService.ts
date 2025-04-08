@@ -23,7 +23,9 @@ export class CalculatorService {
       
       // Check if the error is about division by zero
       const errorMessage = error instanceof Error ? error.message : String(error);
-      if (errorMessage.includes("divide by zero") || errorMessage.includes("division by zero")) {
+      if (errorMessage.includes("divide by zero") || 
+          errorMessage.includes("division by zero") || 
+          errorMessage === "Cannot divide by zero") {
         return { value: "Cannot divide by zero", error: true };
       }
       

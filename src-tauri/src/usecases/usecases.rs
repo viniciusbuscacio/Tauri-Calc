@@ -19,7 +19,8 @@ impl<T: Calculator> CalculateExpressionUseCase<T> {
         match self.calculator.calculate(&expression) {
             Ok(CalculationResult::Float(result)) if result.is_finite() => Ok(result.to_string()),
             Ok(CalculationResult::BigInt(result)) => Ok(result),
-            _ => Err("Error".to_string()),
+            Ok(_) => Err("Cannot divide by zero".to_string()), // Non-finite values (Infinity/NaN)
+            Err(err_msg) => Err(err_msg), // Preserve original error message
         }
     }
 }
