@@ -8,7 +8,7 @@ export const CalculatorDisplay: React.FC<CalculatorDisplayProps> = ({ value }) =
   const displayRef = useRef<HTMLDivElement>(null);
   const [fontClass, setFontClass] = useState('');
   
-  // Detect content length and set appropriate font class
+  // Calculate available space and set appropriate font class
   useEffect(() => {
     if (value === "Error") {
       // No font reduction for error messages
@@ -16,15 +16,37 @@ export const CalculatorDisplay: React.FC<CalculatorDisplayProps> = ({ value }) =
       return;
     }
     
-    // Remove spaces for accurate character count
-    const cleanLength = value.replace(/\s/g, '').length;
+    if (!displayRef.current) return;
     
-    // Use discrete steps based on character count
-    if (cleanLength > 20) {
+    // Create a hidden test element to measure text width
+    const testEl = document.createElement('div');
+    testEl.style.position = 'absolute';
+    testEl.style.visibility = 'hidden';
+    testEl.style.height = 'auto';
+    testEl.style.width = 'auto';
+    testEl.style.whiteSpace = 'nowrap';
+    testEl.style.fontSize = '2.8rem'; // Default font size
+    testEl.style.fontWeight = '300';
+    testEl.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif';
+    testEl.innerHTML = value;
+    document.body.appendChild(testEl);
+    
+    // Get container and test element dimensions
+    const containerWidth = displayRef.current.clientWidth - 40; // Subtract padding (20px on each side)
+    const textWidth = testEl.clientWidth;
+    
+    // Remove the test element
+    document.body.removeChild(testEl);
+    
+    // Calculate the ratio of text width to container width
+    const ratio = textWidth / containerWidth;
+    
+    // Set font class based on available space
+    if (ratio > 1.5) {
       setFontClass('display-font-step3');
-    } else if (cleanLength > 15) {
+    } else if (ratio > 1.2) {
       setFontClass('display-font-step2');
-    } else if (cleanLength > 10) {
+    } else if (ratio > 1) {
       setFontClass('display-font-step1');
     } else {
       setFontClass('');
