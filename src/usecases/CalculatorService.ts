@@ -106,7 +106,7 @@ export class CalculatorService {
       const lastChar = trimmedExpr.slice(0, -1).trim().slice(-1);
       
       // If the last character is an operator, add 0.
-      if (['+', '-', '×', '÷'].includes(lastChar)) {
+      if (['+', '-', '×', '÷', '/'].includes(lastChar)) {  // Also check for regular division symbol
         return currentExpression + '0.';
       }
     }
@@ -115,7 +115,8 @@ export class CalculatorService {
     if (trimmedExpr.endsWith('+') || 
         trimmedExpr.endsWith('-') || 
         trimmedExpr.endsWith('×') || 
-        trimmedExpr.endsWith('÷')) {
+        trimmedExpr.endsWith('÷') ||
+        trimmedExpr.endsWith('/')) {  // Also check for regular division symbol
       return currentExpression + ' 0.';
     }
     
@@ -126,7 +127,7 @@ export class CalculatorService {
     // If last part is empty (means we have an operator followed by space at the end)
     if (lastPart === '' && parts.length > 1) {
       const operatorPart = parts[parts.length - 2];
-      if (['+', '-', '×', '÷'].includes(operatorPart)) {
+      if (['+', '-', '×', '÷', '/'].includes(operatorPart)) {  // Also check for regular division symbol
         return currentExpression + '0.';
       }
     }
