@@ -13,9 +13,12 @@ The calculator features a modern UI with custom window chrome, providing a nativ
 
 * Standard arithmetic operations: Addition (+), Subtraction (-), Multiplication (×), Division (÷)
 * Percentage (%) calculations
-* Decimal point input
+* Decimal point input with automatic "0" prefixing (e.g., "5/.3" becomes "5/0.3")
+* Arbitrary precision for large integer operations (using BigInt)
+* Precise floating-point handling (e.g., "0.1 + 0.2" correctly yields "0.3")
+* Proper error handling for division by zero with specific error message
 * Clear (C) and Backspace functionality
-* Responsive display with dynamic font sizing for longer numbers
+* Responsive display with dynamic font sizing based on actual text width
 * Complete keyboard support, including Numpad and function keys
 * Visual feedback for keyboard input
 * Custom title bar with window controls (Minimize, Maximize/Restore, Close)
@@ -40,6 +43,7 @@ The application follows Clean Architecture principles, with clear separation of 
 * **Backend**:
   * **Language**: [Rust](https://www.rust-lang.org/)
   * **Expression Evaluation**: [meval](https://crates.io/crates/meval) crate
+  * **Arbitrary Precision**: [num-bigint](https://crates.io/crates/num-bigint) crate
 * **Frontend**:
   * **Framework**: [React](https://reactjs.org/)
   * **Build Tool**: [Vite](https://vitejs.dev/)
