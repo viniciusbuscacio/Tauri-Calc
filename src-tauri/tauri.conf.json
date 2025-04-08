@@ -5,13 +5,15 @@
   "identifier": "com.tauri.calc.app",
   "build": {
     "beforeDevCommand": "npm run dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:4322",
     "beforeBuildCommand": "npm run build",
     "frontendDist": "../dist"
   },
   "app": {
     "withGlobalTauri": true,
-    "macOSPrivateApi": true,
+    "#[cfg(target_os = \"macos\")]": {
+      "macOSPrivateApi": true
+    },
     "windows": [
       {
         "fullscreen": false,
