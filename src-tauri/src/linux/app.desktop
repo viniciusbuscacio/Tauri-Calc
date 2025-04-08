@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Calc
+Comment=Simple Calculator
+Exec=calc
+Icon=calc
+Terminal=false
+Type=Application
+Categories=Utility;Calculator;
+Keywords=calculator;calc;math;
