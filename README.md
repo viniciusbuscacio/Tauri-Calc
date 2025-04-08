@@ -2,8 +2,9 @@
 
 A clean, modern, and cross-platform calculator application built with Tauri, React, and Rust following Clean Architecture principles.
 
-![Screenshot](Screenshot/Screenshot-MAC_OS.png)
-
+![Screenshot](Screenshots/Windows11.png)
+![Screenshot](Screenshots/macOS.png)
+![Screenshot](Screenshots/Ubuntu2404.png)
 
 ## About The Project
 
