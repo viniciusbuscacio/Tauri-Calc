@@ -7,11 +7,11 @@ A clean, modern, and cross-platform calculator application built with Tauri, Rea
 
 ## About The Project
 
-This project is a desktop calculator application built with Tauri, created for study purposes. The idea is to understand how Tauri works, and the interaction with Rust, React, Typescript, and also operational systems (Windows 11, MAC OS, Ubuntu Linux).
+This is a desktop calculator built with Tauri, created as a study project to learn how Tauri works and how it connects Rust, React, and TypeScript. It also helps to understand how to build apps that run on Windows 10/11, macOS, and Linux.
 
-Also, the application is structured following Clean Architecture principles, making it maintainable, testable, and adaptable.
+The project follows Clean Architecture principles, which makes the code easier to maintain, test, and improve over time.
 
-The calculator features a modern UI with custom window chrome, providing a native-feeling experience across platforms. All calculations are performed safely within the Rust backend, utilizing the meval parsing library for expression evaluation.
+The calculator has a modern design with custom window controls, giving a native feel on all systems. All calculations are done safely in the Rust backend using the meval library to evaluate expressions.
 
 ## Features
 
