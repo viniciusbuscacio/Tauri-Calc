@@ -71,8 +71,8 @@ Built with Tauri, this application runs natively on:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/calc-app.git
-   cd calc-app
+   git clone https://github.com/viniciusbuscacio/Tauri-Calc.git
+   cd Tauri-Calc
    ```
 
 2. Install dependencies:
