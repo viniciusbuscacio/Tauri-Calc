@@ -1,40 +1,21 @@
-use tauri::{
-    menu::{AboutMetadata, MenuBuilder, PredefinedMenuItem, SubmenuBuilder},
-};
+//! Calculator implementation using Tauri
+//! Following Clean Architecture principles
 
-#[tauri::command]
-fn calculate_result(expression: String) -> Result<String, String> {
-    let processed_expression = expression.replace('×', "*").replace('÷', "/");
+// Include modules directly (not as submodules of lib)
+pub mod domain;
+pub mod usecases;
+pub mod infrastructure;
+pub mod presentation;
 
-    match meval::eval_str(&processed_expression) {
-        Ok(result) if result.is_finite() => Ok(result.to_string()),
-        _ => Err("Error".to_string()),
-    }
-}
-
-
+// Specific imports for use
+use infrastructure::setup_menu;
+use presentation::commands::calculate_result;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
-            let mut about = AboutMetadata::default();
-            about.name = Some("Calc".into());
-            about.version = Some("0.1.0".into());
-            about.copyright = Some("https://github.com/viniciusbuscacio".into());
-
-
-            let calc_menu = SubmenuBuilder::new(app, "Calc")
-                .item(&PredefinedMenuItem::about(app, None, Some(about))?)
-                .item(&PredefinedMenuItem::quit(app, None)?)
-                .build()?;
-
-            let menu = MenuBuilder::new(app)
-                .item(&calc_menu)
-                .build()?;
-
-            app.set_menu(menu)?;
-
+            setup_menu(app)?;
             Ok(())
         })
         .plugin(tauri_plugin_clipboard_manager::init())

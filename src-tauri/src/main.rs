@@ -1,7 +1,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod lib;
+// Use the calc_lib library (defined in lib.rs)
+use calc_lib;
 
 fn main() {
-    lib::run(); // Chama a função run definida em lib.rs
+    calc_lib::run(); // Call the run function defined in lib.rs
 }
