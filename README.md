@@ -2,6 +2,8 @@
 
 A clean, modern, and cross-platform calculator application built with Tauri, React, and Rust following Clean Architecture principles.
 
+![Screenshot](Screenshot/Screenshot-MAC_OS.png)
+
 
 ## About The Project
 
@@ -77,7 +79,7 @@ Built with Tauri, this application runs natively on:
 
   * **macOS**:
     * Xcode Command Line Tools
-    
+
   * **Linux**:
     * WebKitGTK
     * Common build tools and libraries:
