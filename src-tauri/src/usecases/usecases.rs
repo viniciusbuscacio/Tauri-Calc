@@ -1,6 +1,6 @@
 //! Use cases - application rules
 
-use crate::domain::{Calculator, Expression};
+use crate::domain::{Calculator, Expression, CalculationResult};
 
 /// Use case for calculating mathematical expressions
 pub struct CalculateExpressionUseCase<T: Calculator> {
@@ -17,7 +17,8 @@ impl<T: Calculator> CalculateExpressionUseCase<T> {
     pub fn execute(&self, expression_str: String) -> Result<String, String> {
         let expression = Expression::new(expression_str);
         match self.calculator.calculate(&expression) {
-            Ok(result) if result.is_finite() => Ok(result.to_string()),
+            Ok(CalculationResult::Float(result)) if result.is_finite() => Ok(result.to_string()),
+            Ok(CalculationResult::BigInt(result)) => Ok(result),
             _ => Err("Error".to_string()),
         }
     }
