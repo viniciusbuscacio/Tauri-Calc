@@ -35,24 +35,9 @@
     "targets": "all",
     "icon": [
       "icons/icon.ico",
-      "icons/icon.png"
-    ],
-    "linux": {
-      "icon": [
-        "icons/16x16/icon.png",
-        "icons/32x32/icon.png",
-        "icons/128x128/icon.png",
-        "icons/icon.png"
-      ],
-      "categories": ["Utility", "Calculator"],
-      "desktopFile": "src/linux/app.desktop"
-    },
-    "appimage": {
-      "bundleIdentifier": "com.tauri.calc.app"
-    },
-    "deb": {
-      "depends": ["libwebkit2gtk-4.0-dev", "libgtk-3-dev"]
-    }
+      "icons/icon.png",
+      "icons/icon.svg"
+    ]
   },
   "plugins": {}
 }
