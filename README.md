@@ -64,14 +64,30 @@ Built with Tauri, this application runs natively on:
 
 ## Development Setup
 
+
 ### Prerequisites
 
-* [Node.js](https://nodejs.org/) (v18 or higher)
-* [Rust & Cargo](https://www.rust-lang.org/tools/install) (2021 edition)
+* [Node.js](https://nodejs.org/) (v18 or higher)  
+* [Rust & Cargo](https://www.rust-lang.org/tools/install) (2021 edition) 
+
 * Platform-specific dependencies:
-  * **Windows**: Microsoft Visual C++ Build Tools, WebView2
-  * **macOS**: Xcode Command Line Tools
-  * **Linux**: WebKitGTK, standard build tools
+  * **Windows**:
+    * Microsoft Visual C++ Build Tools (automatically installed with Rust via rustup – through the Visual Studio Community Edition installer)
+    * WebView2
+
+  * **macOS**:
+    * Xcode Command Line Tools
+    
+  * **Linux**:
+    * WebKitGTK
+    * Common build tools and libraries:
+
+      ```bash
+      sudo apt-get install -y libwebkit2gtk-4.0-dev build-essential curl wget libssl-dev libgtk-3-dev \
+      libayatana-appindicator3-dev librsvg2-dev libglib2.0-dev
+      ```
+
+
 
 ### Installation
 
