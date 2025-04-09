@@ -91,7 +91,7 @@ On Ubuntu 24.04, the following packages are required:
 ```bash
 sudo apt-get install -y build-essential curl wget libssl-dev libgtk-3-dev \ 
 libayatana-appindicator3-dev librsvg2-dev libglib2.0-dev \
-libjavascriptcoregtk-4.1-dev libsoup-3.0-dev libwebkit2gtk-4.1-dev \
+libjavascriptcoregtk-4.1-dev libsoup-3.0-dev libwebkit2gtk-4.1-dev
 ```
 
 
