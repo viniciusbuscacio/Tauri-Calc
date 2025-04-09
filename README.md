@@ -65,7 +65,8 @@ Built with Tauri, this application runs natively on:
 - **macOS** (Intel & Apple Silicon via Universal Binary)  
 - **Linux** (.deb, .rpm, and .AppImage)
 
-Pre-built installers for all platforms are available in the `Installers` folder.
+Pre-built installers for all platforms are available in the [Installers](./Installers/) folder.
+
 
 ## Development Setup
 
