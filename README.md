@@ -97,7 +97,7 @@ libjavascriptcoregtk-4.1-dev libsoup-3.0-dev libwebkit2gtk-4.1-dev \
 
 ### Installation
 
-If you just want to download the app to test it, installers for Windows, macOS, and Linux are available in the (Installers) folder."
+If you just want to download the app to test it, installers for Windows, macOS, and Linux are available in the [Installers](./Installers/) folder.
 
 To run it as a developer:
 
