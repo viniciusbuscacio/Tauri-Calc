@@ -62,8 +62,8 @@ The application follows Clean Architecture principles, with clear separation of 
 Built with Tauri, this application runs natively on:
 
 - **Windows** 10/11  
-- **macOS** (Intel & Apple Silicon via Universal Binary)  
-- **Linux** (.deb, .rpm, and .AppImage)
+- **macOS** 
+- **Linux** (.deb and .rpm)
 
 Pre-built installers for all platforms are available in the [Installers](./Installers/) folder.
 
