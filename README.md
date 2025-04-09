@@ -128,7 +128,7 @@ npm run tauri build
 This command generates platform-specific installers in `src-tauri/target/release/bundle/`:
 * Windows: `.msi` installer
 * macOS: `.dmg` and `.app` bundle
-* Linux: `.deb` and `.AppImage`
+* Linux: `.deb` and `.rpm`
 
 
 
