@@ -21,22 +21,35 @@ impl Expression {
             // Find the start of the number before %
             let before = &result[..pos];
             let mut num_start = pos;
+            let mut num_end = pos;
             
-            // Walk backwards to find where the number starts
+            // Walk backwards, skipping spaces first, then finding the number
+            let mut found_digit = false;
             for (i, c) in before.chars().rev().enumerate() {
                 if c.is_digit(10) || c == '.' {
+                    if !found_digit {
+                        num_end = pos - i;
+                        found_digit = true;
+                    }
                     num_start = pos - i - 1;
-                } else {
+                } else if found_digit {
+                    // We found a non-digit after finding digits, stop here
                     break;
                 }
+                // Skip spaces before the number
             }
             
-            // Extract the number
-            let number = &result[num_start..pos];
+            // Extract the number (trim any spaces)
+            let number = result[num_start..num_end].trim();
             
-            // Replace "X%" with "(X/100)"
-            let replacement = format!("({}/100)", number);
-            result = format!("{}{}{}", &result[..num_start], replacement, &result[pos+1..]);
+            if number.is_empty() {
+                // No number found, just remove the %
+                result = format!("{}{}", &result[..pos], &result[pos+1..]);
+            } else {
+                // Replace "X%" or "X %" with "(X/100)"
+                let replacement = format!("({}/100)", number);
+                result = format!("{}{}{}", &result[..num_start], replacement, &result[pos+1..]);
+            }
         }
         
         result
