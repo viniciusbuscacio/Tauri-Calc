@@ -26,7 +26,6 @@ pub fn run() {
     // For all platforms, continue with the rest of the setup
     builder
         .plugin(tauri_plugin_clipboard_manager::init())
-        .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![calculate_result])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

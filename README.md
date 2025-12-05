@@ -17,7 +17,8 @@ The calculator has a modern design with custom window controls, giving a native 
 ## Features
 
 - Standard arithmetic operations: Addition (+), Subtraction (-), Multiplication (×), Division (÷)
-- Percentage (%) calculations
+- Percentage (%) calculations (e.g., "100 × 50%" correctly yields "50")
+- Correct operator precedence (e.g., "2 + 3 × 4" correctly yields "14")
 - Decimal point input with automatic "0" prefixing (e.g., "5/.3" becomes "5/0.3")
 - Arbitrary precision for large integer operations (using BigInt)
 - Precise floating-point handling (e.g., "0.1 + 0.2" correctly yields "0.3")
@@ -77,7 +78,7 @@ Pre-built installers for all platforms are available in the [Installers](./Insta
 
 #### Windows
 
-- Microsoft Visual C++ Build Tools (instalado com o Rust via rustup)  
+- Microsoft Visual C++ Build Tools (installed with Rust via rustup)  
 - WebView2 Runtime
 
 #### macOS
@@ -130,7 +131,15 @@ This command generates platform-specific installers in `src-tauri/target/release
 * macOS: `.dmg` and `.app` bundle
 * Linux: `.deb` and `.rpm`
 
+## Performance Optimizations
 
+The release build includes several optimizations for faster startup and smaller binary size:
+
+- **Link Time Optimization (LTO)**: Enables whole-program optimization
+- **Single codegen unit**: Better optimization at the cost of longer compile times
+- **Symbol stripping**: Removes debug symbols from the release binary
+- **Size optimization**: Optimized for smaller binary size (`opt-level = "z"`)
+- **Panic abort**: Removes unwinding code for smaller binary
 
 ## Testing
 

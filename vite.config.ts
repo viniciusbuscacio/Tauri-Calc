@@ -7,6 +7,7 @@ const host = process.env.TAURI_DEV_HOST;
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
   plugins: [react()],
+  base: './',  // Use relative paths for Tauri
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
@@ -27,6 +28,18 @@ export default defineConfig(async () => ({
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
       ignored: ["**/src-tauri/**"],
+    },
+  },
+  
+  // Build optimizations for faster startup
+  build: {
+    target: "esnext",           // Modern browsers only (smaller output)
+    minify: "esbuild",          // Fastest minifier
+    cssMinify: true,            // Minify CSS
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Disable code splitting (single bundle loads faster)
+      },
     },
   },
 }));

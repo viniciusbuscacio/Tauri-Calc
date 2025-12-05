@@ -13,7 +13,33 @@ impl Expression {
     
     /// Normalize the expression to the format that the meval library understands
     pub fn normalize(&self) -> String {
-        self.0.replace('×', "*").replace('÷', "/")
+        let mut result = self.0.replace('×', "*").replace('÷', "/");
+        
+        // Convert percentage: "X%" becomes "(X/100)"
+        // Handle cases like "100 * 50%" -> "100 * (50/100)"
+        while let Some(pos) = result.find('%') {
+            // Find the start of the number before %
+            let before = &result[..pos];
+            let mut num_start = pos;
+            
+            // Walk backwards to find where the number starts
+            for (i, c) in before.chars().rev().enumerate() {
+                if c.is_digit(10) || c == '.' {
+                    num_start = pos - i - 1;
+                } else {
+                    break;
+                }
+            }
+            
+            // Extract the number
+            let number = &result[num_start..pos];
+            
+            // Replace "X%" with "(X/100)"
+            let replacement = format!("({}/100)", number);
+            result = format!("{}{}{}", &result[..num_start], replacement, &result[pos+1..]);
+        }
+        
+        result
     }
     
     /// Check if the expression contains division by zero
@@ -76,17 +102,35 @@ impl Expression {
         false
     }
     
-    /// Check if the expression is an integer operation
+    /// Check if the expression is an integer operation that can be safely computed with BigInt
+    /// Only returns true for simple operations without mixed precedence
     pub fn is_integer_operation(&self) -> bool {
-        // Check if the expression contains only digits, +, -, spaces and potentially a single *
         let normalized = self.normalize();
+        
+        // Check if there's no decimal point or exponential notation
+        if normalized.contains('.') || normalized.contains('e') || normalized.contains('E') {
+            return false;
+        }
+        
+        // Check if the expression contains only digits and allowed operators
         let contains_only_allowed_chars = normalized.chars().all(|c| {
             c.is_digit(10) || c == '+' || c == '-' || c == ' ' || c == '*'
         });
         
-        // Check if there's no decimal point or exponential notation
-        !normalized.contains('.') && !normalized.contains('e') && !normalized.contains('E')
-            && contains_only_allowed_chars
+        if !contains_only_allowed_chars {
+            return false;
+        }
+        
+        // Don't use BigInt if there's mixed precedence (+ or - with *)
+        // This ensures we use meval which respects operator precedence
+        let has_add_sub = normalized.contains('+') || normalized.chars().enumerate().any(|(i, c)| {
+            // Check for minus that's not at the start (to allow negative numbers)
+            c == '-' && i > 0 && normalized.chars().nth(i-1).map(|prev| prev.is_digit(10) || prev == ' ').unwrap_or(false)
+        });
+        let has_mul = normalized.contains('*');
+        
+        // Only use BigInt for pure addition/subtraction OR pure multiplication, not mixed
+        !(has_add_sub && has_mul)
     }
 }
 
